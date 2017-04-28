@@ -1,5 +1,7 @@
 var sneky;
-var foodie;
+var foodie1;
+var foodie2;
+var foodie3;
 var movementVar = 10;
 var nom = new Audio('assets/nom.mp3');
 var theme = new Audio('assets/snake_theme.mp3');
@@ -11,7 +13,9 @@ function setup() {
     createCanvas(850, 850);
     // Initiate Snake + food //
     sneky = new snake();
-    foodie = new snakeSnacks();
+    foodie1 = new snakeSnacks();
+    foodie2 = new snakeSnacks();
+    foodie3 = new snakeSnacks();
     theme.play()
 }
 
@@ -20,9 +24,13 @@ function draw() {
     sneky.update();
     sneky.appear();
     sneky.death();
-    nomnomnom(sneky, foodie);
-    fill('#ff2d35');
-    rect(foodie.x, foodie.y, 10, 10);
+    nomnomnom(sneky, foodie1);
+    nomnomnom(sneky, foodie2);
+    nomnomnom(sneky, foodie3);
+    fill(getRandomColor());
+    rect(foodie1.x, foodie1.y, 10, 10);
+    rect(foodie2.x, foodie2.y, 10, 10);
+    rect(foodie3.x, foodie3.y, 10, 10);
 }
 
 function nomnomnom(snake, food) {
@@ -128,4 +136,14 @@ function keyPressed() {
     else if (sneky.yMove >= 0 && keyCode === DOWN_ARROW || key === 'S' && sneky.yMove >= 0) {
         return sneky.changeDir(0, 1);
     }
+};
+
+/* Random color generator for food */
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
