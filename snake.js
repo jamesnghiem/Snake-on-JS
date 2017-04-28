@@ -1,6 +1,10 @@
 var sneky;
 var foodie;
 var movementVar = 10;
+var nom = new Audio('assets/nom.mp3');
+var theme = new Audio('assets/snake_theme.mp3');
+
+theme.volume = 0.3;
 
 function setup() {
     frameRate(20);
@@ -8,6 +12,7 @@ function setup() {
     // Initiate Snake + food //
     sneky = new snake();
     foodie = new snakeSnacks();
+    theme.play()
 }
 
 function draw() {
@@ -24,7 +29,7 @@ function nomnomnom(snake, food) {
     if (snake.xPos[0] === food.x && snake.yPos[0] === food.y) {
         food.delete();
         snake.powerup();
-        print(snake.xPos, snake.yPos);
+        nom.play();
     }
 }
 
